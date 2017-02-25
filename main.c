@@ -3,18 +3,20 @@
 
 #include "ch.h"
 #include "hal.h"
+#include "hw_conf.h"
+#include "gpio.h"
 
 int main(void) {
 
     halInit();
     chSysInit();
-    palSetPadMode(GPIOB, 0, PAL_MODE_OUTPUT_PUSHPULL |
-                                PAL_STM32_OSPEED_HIGHEST);
+    gpioInit();
+
     while(1)
     {
-        palClearPad(GPIOB, 0);
+        palClearPad(EN_GPIO, EN1_PIN);
         chThdSleepMilliseconds(100);
-        palSetPad(GPIOB, 0);
+        palSetPad(EN_GPIO, EN1_PIN);
         chThdSleepMilliseconds(100);
     }
 }
