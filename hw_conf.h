@@ -1,7 +1,7 @@
 #include "ch.h"
 #include "hal.h"
 
-// ENABLE Pins
+// ENABLE
 #define EN_GPIO GPIOB
 #define EN1_PIN 0
 #define EN2_PIN 1
