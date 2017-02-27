@@ -7,9 +7,19 @@ git clone https://github.com/anuragmakineni/lighting_firmware.git
 ```
 ##Compiling
 You'll need to install the following gcc arm cross compiler.
+
+####Ubuntu
 ```
 sudo apt-get install gcc-arm-none-eabi
 ```
+
+####Mac OS
+```
+brew tap PX4/homebrew-px4
+brew update
+brew install gcc-arm-none-eabi-48
+```
+
 To build the files. Navigate to the root of the repository and run the following:
 ```
 make
