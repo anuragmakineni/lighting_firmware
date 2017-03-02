@@ -3,7 +3,6 @@
 #include "hw_conf.h"
 #include "math.h"
 
-//i2c configuration
 static const I2CConfig i2cconfig = {
     STM32_TIMINGR_PRESC(15U) |
     STM32_TIMINGR_SCLDEL(4U) | STM32_TIMINGR_SDADEL(2U) |
