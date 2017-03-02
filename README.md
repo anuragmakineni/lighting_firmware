@@ -40,3 +40,6 @@ On Ubuntu 14.04, dfu-util must be installed from source. See instructions here: 
 2. Enable bootloader mode by reseting the board while the bootloader button is held down.
 3. Ensure that no other boards are connected that are also in bootloader mode.
 4. Run the following to build and upload the code. ```make upload```
+
+##Configuration
+To configure the system for your particular LED setup, edit led_config.h. This file contains the i2c address and enable pin associated with each LED.
