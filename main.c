@@ -17,7 +17,7 @@ int main(void) {
 
     while(1)
     {
-       setDAC(LED1_ADDR, 0x0F, 0xFF);
+       setDAC(LED1_ADDR, 3.3, LED1_VREF);
        chThdSleepMilliseconds(10);
     }
 }

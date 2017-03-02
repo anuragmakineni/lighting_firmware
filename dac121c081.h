@@ -4,5 +4,6 @@
 
 
 void dacInit(void);
-void setDAC(uint8_t addr, uint8_t DB1, uint8_t DB2);
+void setDAC(uint8_t addr, float v_set, float v_ref);
+float readDAC(uint8_t addr, float v_ref);
 
