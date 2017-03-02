@@ -42,4 +42,4 @@ On Ubuntu 14.04, dfu-util must be installed from source. See instructions here: 
 4. Run the following to build and upload the code. ```make upload```
 
 ##Configuration
-To configure the system for your particular LED setup, edit ```led_config.h```. This file contains the i2c address and enable pin associated with each LED.
+To configure the system for your particular LED setup, edit ```led_config.h```. This file contains the i2c address, enable pin, and DAC reference voltage associated with each LED.
