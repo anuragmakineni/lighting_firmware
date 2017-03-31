@@ -25,8 +25,6 @@ static bool valid_packet = false;
 void process_byte(uint8_t data_byte) {
     // check for terminator
     if (data_byte == '\n'){
-       chprintf((BaseSequentialStream *)&SDU1, "%s\n", "end of packet");
-       chprintf((BaseSequentialStream *)&SDU1, "%d\n", packet_index);
         if (valid_packet && packet_index == PACKET_LENGTH){
             chprintf((BaseSequentialStream *)&SDU1, "%s\n", packet);
         }
@@ -39,7 +37,6 @@ void process_byte(uint8_t data_byte) {
         if (packet_index >= PACKET_LENGTH){
             packet_index = 0;
             valid_packet = false;
-            chprintf((BaseSequentialStream *)&SDU1, "%s\n", "too long, reset");
         }
         packet[packet_index++] = data_byte;
     }
@@ -48,10 +45,7 @@ void process_byte(uint8_t data_byte) {
     if (data_byte == 'P') {
         packet_index = 0;
         valid_packet = true;
-        chprintf((BaseSequentialStream *)&SDU1, "%s\n", "start of packet");
     }
-
-
 }
 
 
@@ -61,7 +55,7 @@ int main(void) {
     chSysInit();
     gpioInit();
     dacInit();
-    
+
     sduObjectInit(&SDU1);
     sduStart(&SDU1, &serusbcfg);
 
