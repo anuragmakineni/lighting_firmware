@@ -13,7 +13,7 @@
 #define usb_lld_connect_bus(usbp)
 #define usb_lld_disconnect_bus(usbp)
 #define SERIAL_RX_BUFFER_SIZE (1024)
-#define PACKET_LENGTH (18)
+#define PACKET_LENGTH (NUM_LED * 2)
 static uint8_t serial_rx_buffer[SERIAL_RX_BUFFER_SIZE];
 static uint8_t packet[PACKET_LENGTH];
 static int serial_rx_read_pos = 0;
@@ -21,12 +21,17 @@ static int serial_rx_write_pos = 0;
 static int packet_index = 0;
 static bool valid_packet = false;
 
+// we have a valid packet - parse it now
+void process_packet(void) {
+    chprintf((BaseSequentialStream *)&SDU1, "%s\n", packet);
+}
+
 // process serial byte
 void process_byte(uint8_t data_byte) {
     // check for terminator
     if (data_byte == '\n'){
         if (valid_packet && packet_index == PACKET_LENGTH){
-            chprintf((BaseSequentialStream *)&SDU1, "%s\n", packet);
+            process_packet();
         }
         packet_index = 0;
         valid_packet = false;
@@ -48,7 +53,6 @@ void process_byte(uint8_t data_byte) {
     }
 }
 
-
 int main(void) {
 
     halInit();
@@ -66,8 +70,6 @@ int main(void) {
 
     while(1)
     {
-        setDAC(LED1_ADDR, 1.0, LED1_VREF);
-
         // listen for serial byte
         uint8_t buffer[128];
         int i;

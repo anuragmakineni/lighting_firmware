@@ -16,13 +16,8 @@ void dacInit(void)
     i2cStart(&I2C_DEV, &i2cconfig);
 }
 
-void setDAC(uint8_t addr, float v_set, float v_ref)
+void setDAC(uint8_t addr, uint8_t DB1, uint8_t DB2)
 {
-    // calculate upper and lower data bytes
-    int ctl = (int) roundf((v_set / v_ref) * 4095);
-    uint8_t DB1 = ctl >> 8;
-    uint8_t DB2 = ctl & 0xFF;
-
     // populate packet
     uint8_t tx[2];
     uint8_t rx[1];
