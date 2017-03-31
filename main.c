@@ -21,9 +21,11 @@ static int serial_rx_write_pos = 0;
 static int packet_index = 0;
 static bool valid_packet = false;
 
+
 // we have a valid packet - parse it now
 void process_packet(void) {
     chprintf((BaseSequentialStream *)&SDU1, "%s\n", packet);
+    setDAC(LED1_ADDR, packet[0], packet[1]);
 }
 
 // process serial byte
@@ -98,6 +100,5 @@ int main(void) {
             }
         }
 
-        chThdSleepMilliseconds(1);
     }
 }
